@@ -1,5 +1,7 @@
 package me.xxfreakdevxx.de.game;
 
+import me.xxfreakdevxx.de.game.objects.GameObject;
+
 public class Camera {
 	private float x=0,y=0;
 	private float move_speed = 5f;
@@ -13,18 +15,16 @@ public class Camera {
 		this.y=(float)location.getY();
 	}
 	
-	public void tick() {
-		x += ((MouseInput.getInstance().x_uncon - x) - Game.windowWidth/2) * 0.05f;
-		y += ((MouseInput.getInstance().y_uncon - y) - Game.windowHeight/2) * 0.05f;
-//		x += ((object.getLocation().getX(false) - x) - SquareCraft.windowWidth/2);
-//		y += ((object.getLocation().getY(false) - y) - SquareCraft.windowHeight/2);
+	public void tick(GameObject object) {
+		this.x += ((MouseInput.getInstance().x_uncon - this.x) - Game.windowWidth/2) * 0.05f;
+		this.y += ((MouseInput.getInstance().y_uncon - this.y) - Game.windowHeight/2) * 0.05f;
+		this.x += ((object.x - this.x) - Game.windowWidth/2);
+		this.y += ((object.y - this.y) - Game.windowHeight/2);
 	
-		if(x <= 0) x = 0; 
-		if(x >= (Game.windowWidth + 32)) x = (Game.windowWidth+32);
-		if(y <= 0) y = 0; 
-		if(x >= (Game.windowHeight + 16)) x = (Game.windowHeight+16);
-		Game.log("camera", "X/10:"+(x/10));
-		Game.log("camera", "Y/10:"+(y/10));
+		if(this.x <= 0) this.x = 0; 
+		if(this.x >= (Game.windowWidth + 32)) this.x = (Game.windowWidth+32);
+		if(this.y <= 0) this.y = 0; 
+		if(this.x >= (Game.windowHeight + 16)) this.x = (Game.windowHeight+16);
 	}
 
 	public float getX() {

@@ -1,6 +1,5 @@
 package me.xxfreakdevxx.de.game.state;
 
-import java.awt.Canvas;
 import java.awt.Graphics;
 
 import me.xxfreakdevxx.de.game.Game;
@@ -17,15 +16,13 @@ public class InGameState extends GameState {
 	 * render(Graphics g);
 	 * tick();
 	 */
-	public World world;
-	private Canvas canvas = Game.getInstance();
-	
+	public World world;	
 	public InGameState() {
 		super("[In Game State]");
 		
 		world = new World();
 		
-		Box2D rect = new Box2D(130, 600, 240, 20, "Boden");
+		Box2D rect = new Box2D(130, 600, 2040, 20, "Boden");
 		world.addObjectToWorld(rect);
 	}
 	
@@ -37,6 +34,7 @@ public class InGameState extends GameState {
 	@Override
 	public void tick() {
 		world.tick();
+		Game.getCamera().tick(world.player);
 	}
 	
 }

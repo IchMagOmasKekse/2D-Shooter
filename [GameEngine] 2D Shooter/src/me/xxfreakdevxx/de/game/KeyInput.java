@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import me.xxfreakdevxx.de.game.state.InGameState;
 import me.xxfreakdevxx.de.game.state.StateManager;
 
 
@@ -13,6 +14,8 @@ public class KeyInput extends KeyAdapter {
 	
 	public List<String> cooldown_bypass = new LinkedList<String>();
 	public ConcurrentLinkedQueue<Integer> pressed_keys = new ConcurrentLinkedQueue<Integer>();
+	
+	public float move_speed = 3f;
 	
 	public KeyInput() {
 		addBypass("W", "A", "S", "D");
@@ -31,8 +34,16 @@ public class KeyInput extends KeyAdapter {
 		for(int key : pressed_keys) {
 			switch(key) {
 			case KeyEvent.VK_W:
-				release(key);
-				StateManager.getCurrentState().w
+				((InGameState)StateManager.getCurrentState()).world.player.y -= move_speed;
+				break;
+			case KeyEvent.VK_A:
+				((InGameState)StateManager.getCurrentState()).world.player.x -= move_speed;
+				break;
+			case KeyEvent.VK_S:
+				((InGameState)StateManager.getCurrentState()).world.player.y += move_speed;
+				break;
+			case KeyEvent.VK_D:
+				((InGameState)StateManager.getCurrentState()).world.player.x += move_speed;
 				break;
 			case KeyEvent.VK_P:
 				Game.getCamera().biggerOffset();

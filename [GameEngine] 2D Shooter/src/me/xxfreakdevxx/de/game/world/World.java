@@ -32,7 +32,8 @@ public class World {
 	
 	public void tick() {
 		player.tick();
-		for(GameObject go : objects) go.tick();		
+		for(GameObject go : objects) go.tick();
+		for(GameObject go : objects) checkColission(go);
 	}
 	
 	public boolean addObjectToWorld(GameObject obj) {
@@ -43,6 +44,15 @@ public class World {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void checkColission(GameObject go) {
+		for(GameObject g : objects){
+			if(g != go && g.intersects(go)) {
+				System.out.println("Box2D: "+((Box2D)g).box_name+" intersects with "+((Box2D)g).box_name);
+			}
+		}
+		
 	}
 	
 }

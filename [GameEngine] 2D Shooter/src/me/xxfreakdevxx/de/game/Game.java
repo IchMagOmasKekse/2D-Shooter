@@ -2,6 +2,7 @@ package me.xxfreakdevxx.de.game;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferStrategy;
 import java.text.SimpleDateFormat;
@@ -128,6 +129,7 @@ public class Game extends Canvas implements Runnable {
 		Game.windowHeight = window.frame.getHeight();
 		if(keyinput != null) keyinput.tick();
 		StateManager.tick();
+		camera.tick(((InGameState)StateManager.getCurrentState()).world.player);
 	}
 	private boolean readyToRender = false;
 	public void render() {
@@ -138,12 +140,14 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(new Color(240,240,240));
-		g.clearRect(0, 0, Game.windowWidth, Game.windowHeight);
-		g.fillRect(0, 0, Game.windowWidth, Game.windowHeight);
-		g.setColor(Color.BLACK);
-		
-		StateManager.render(g);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setColor(new Color(240,240,240));
+		g2d.clearRect(0, 0, Game.windowWidth, Game.windowHeight);
+		g2d.fillRect(0, 0, Game.windowWidth, Game.windowHeight);
+		g2d.setColor(Color.BLACK);
+		g2d.translate(-camera.getX(), -camera.getY());
+		StateManager.render(g2d);
+		g2d.translate(camera.getX(), camera.getY());
 		
 		g.dispose();
 		bs.show();
