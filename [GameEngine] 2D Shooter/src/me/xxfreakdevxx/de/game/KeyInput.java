@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import me.xxfreakdevxx.de.game.state.StateManager;
+
 
 public class KeyInput extends KeyAdapter {
 	
@@ -28,6 +30,10 @@ public class KeyInput extends KeyAdapter {
 		else return;
 		for(int key : pressed_keys) {
 			switch(key) {
+			case KeyEvent.VK_W:
+				release(key);
+				StateManager.getCurrentState().w
+				break;
 			case KeyEvent.VK_P:
 				Game.getCamera().biggerOffset();
 				break;
