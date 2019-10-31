@@ -1,9 +1,11 @@
 package me.xxfreakdevxx.de.game.world;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
 
+import me.xxfreakdevxx.de.game.MouseInput;
 import me.xxfreakdevxx.de.game.objects.Box2D;
 import me.xxfreakdevxx.de.game.objects.GameObject;
 
@@ -26,8 +28,8 @@ public class World {
 	}
 	
 	public void render(Graphics g) {
-		player.render(g);
 		for(GameObject go : objects) go.render(g);
+		player.render(g);
 	}
 	
 	public void tick() {
@@ -48,11 +50,10 @@ public class World {
 	
 	public void checkColission(GameObject go) {
 		for(GameObject g : objects){
-			if(g != go && g.intersects(go)) {
+			if(g != go && go.intersects(g)) {
 				System.out.println("Box2D: "+((Box2D)g).box_name+" intersects with "+((Box2D)g).box_name);
 			}
 		}
-		
 	}
 	
 }

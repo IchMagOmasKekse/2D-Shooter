@@ -27,7 +27,7 @@ public class Box2D extends GameObject {
 	
 	public void render(Graphics g) {
 		g.setColor(fill_color);
-		g.fillRect(x, y, width, height);
+		g.drawRect((int)getBounds2D().getX(), (int)getBounds2D().getY(), width, height);
 		g.setColor(new Color(0f,0f,0f,0.3f));
 		g.fillRect(x-2, y-10, 100, 20);
 		g.setColor(Color.WHITE);
