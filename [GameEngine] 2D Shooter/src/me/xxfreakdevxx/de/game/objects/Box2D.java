@@ -14,6 +14,7 @@ public class Box2D extends GameObject {
 	 */
 	
 	public String box_name = "Unnamed";
+	public Color fill_color = Color.GRAY;
 	private static final long serialVersionUID = 1L;
 
 	public Box2D(int x, int y, int w, int h) {
@@ -25,8 +26,12 @@ public class Box2D extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.DARK_GRAY);
+		g.setColor(fill_color);
 		g.fillRect(x, y, width, height);
+		g.setColor(new Color(0f,0f,0f,0.3f));
+		g.fillRect(x-2, y-10, 100, 20);
+		g.setColor(Color.WHITE);
+		g.drawString("X/Y: "+getBounds2D().getX()+"/"+getBounds2D().getY(), (int)getBounds2D().getX(), (int)getBounds2D().getY());
 	}
 	
 	public void tick() {

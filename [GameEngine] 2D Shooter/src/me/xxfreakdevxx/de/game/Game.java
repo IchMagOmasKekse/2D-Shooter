@@ -129,7 +129,7 @@ public class Game extends Canvas implements Runnable {
 		Game.windowHeight = window.frame.getHeight();
 		if(keyinput != null) keyinput.tick();
 		StateManager.tick();
-		camera.tick(((InGameState)StateManager.getCurrentState()).world.player);
+		if(camera != null && StateManager.getCurrentState() instanceof InGameState) camera.tick(((InGameState)StateManager.getCurrentState()).world.player);
 	}
 	private boolean readyToRender = false;
 	public void render() {

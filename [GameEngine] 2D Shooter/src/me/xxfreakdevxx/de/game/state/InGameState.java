@@ -1,5 +1,6 @@
 package me.xxfreakdevxx.de.game.state;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import me.xxfreakdevxx.de.game.Game;
@@ -22,8 +23,9 @@ public class InGameState extends GameState {
 		
 		world = new World();
 		
-		Box2D rect = new Box2D(130, 600, 2040, 20, "Boden");
-		world.addObjectToWorld(rect);
+		Box2D box = new Box2D(130, 600, 2040, 20, "Boden");
+		box.fill_color = Color.green;
+		world.addObjectToWorld(box);
 	}
 	
 	@Override
